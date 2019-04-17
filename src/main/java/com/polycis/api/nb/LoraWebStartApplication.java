@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableHystrixDashboard
 @MapperScan("com.polycis.api.nb.mapper")
 @RestController
-public class LoraWebStartApplication extends SpringBootServletInitializer {
+public class DevRegWebStartApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(
             SpringApplicationBuilder application) {
-        return application.sources(LoraWebStartApplication.class);
+        return application.sources(DevRegWebStartApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(LoraWebStartApplication.class, args);
+        SpringApplication.run(DevRegWebStartApplication.class, args);
     }
 
 }

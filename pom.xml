@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.polycis.api</groupId>
-	<artifactId>polycis_ns_lora_server</artifactId>
+	<artifactId>polycis_ns_dev_server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: polycis-nb-web-server
+server:
+  port: 12500
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 200
+    connection-timeout: 5000
+    acceptCount: 100
+
+eureka:
+  client:
+    healthcheck:
+      enable: true
+    registryFetchIntervalSeconds: 30
+    serviceUrl:
+      defaultZone: http://127.0.0.1:11100/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 90
+    leaseRenewalIntervalInSeconds: 30
+    preferIpAddress: true

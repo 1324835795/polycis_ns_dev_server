@@ -1,8 +1,8 @@
 spring:
   application:
-    name: polycis-nb-web-server
+    name: polycis-ns-dev-server
 server:
-  port: 12500
+  port: 12501
   tomcat:
     uri-encoding: UTF-8
     max-threads: 200

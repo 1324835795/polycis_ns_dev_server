@@ -1,9 +1,8 @@
-package com.polycis.api.nb.puls.controller;
+package com.polycis.api.nb.controller.device;
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * <p>

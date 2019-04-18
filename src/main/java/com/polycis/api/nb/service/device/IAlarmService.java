@@ -1,7 +1,7 @@
-package com.polycis.api.nb.puls.service;
+package com.polycis.api.nb.service.device;
 
-import com.polycis.api.nb.puls.entity.Alarm;
 import com.baomidou.mybatisplus.service.IService;
+import com.polycis.api.nb.puls.entity.Alarm;
 
 /**
  * <p>

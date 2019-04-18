@@ -1,6 +1,5 @@
 import com.polycis.api.nb.LoraWebStartApplication;
 import com.polycis.api.nb.entity.device.DeviceEntity;
-import com.polycis.api.nb.mapper.device.DeviceMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

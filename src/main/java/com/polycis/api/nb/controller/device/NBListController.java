@@ -4,7 +4,6 @@ import com.polycis.api.nb.common.ApiResult;
 import com.polycis.api.nb.common.CommonCode;
 import com.polycis.api.nb.common.config.rabbit.MsgProducer;
 import com.polycis.api.nb.entity.device.DeviceEntity;
-import com.polycis.api.nb.mapper.device.DeviceMapper;
 import com.polycis.api.nb.service.device.IDeviceListService;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -29,8 +28,7 @@ public class NBListController
     IDeviceListService deviceListService;
     @Autowired
     MsgProducer msgProducer;
-    @Autowired
-    DeviceMapper deviceMapper;
+
 
     /**
      * http://127.0.0.1:12500/lora/list
@@ -64,16 +62,16 @@ public class NBListController
     }
 
 
-    /**
+   /* *//**
      * http://127.0.0.1:12500/lora/devices
-     * */
+     * *//*
     @RequestMapping(value = "/devices", produces = {"application/json;charset=UTF-8"})
     public String devices() {
         ApiResult apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         List<DeviceEntity> deviceEntities=   deviceMapper.selectList(null);
         apiResult.setData(deviceEntities);
         return apiResult.toString();
-    }
+    }*/
 
 
 }

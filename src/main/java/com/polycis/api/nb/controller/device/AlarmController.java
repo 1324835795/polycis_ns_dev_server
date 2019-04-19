@@ -3,6 +3,7 @@ package com.polycis.api.nb.controller.device;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author ${author}
  * @since 2019-04-18
  */
-@Controller
+@RestController
 @RequestMapping("/alarm")
 public class AlarmController {
 

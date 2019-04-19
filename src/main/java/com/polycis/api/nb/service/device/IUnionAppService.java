@@ -9,8 +9,15 @@ import com.polycis.api.nb.entity.device.UnionApp;
  * </p>
  *
  * @author ${author}
- * @since 2019-04-18
+ * @since 2019-04-19
  */
 public interface IUnionAppService extends IService<UnionApp> {
+
+    /**
+     * 新增应用`
+     * @param
+     * @return
+     */
+    boolean addApp(UnionApp deviceInfo);
 
 }

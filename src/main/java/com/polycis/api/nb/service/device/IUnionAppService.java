@@ -1,7 +1,7 @@
 package com.polycis.api.nb.service.device;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.polycis.api.nb.puls.entity.UnionApp;
+import com.polycis.api.nb.entity.device.UnionApp;
 
 /**
  * <p>

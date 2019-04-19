@@ -2,8 +2,8 @@ package com.polycis.api.nb.service.device.impl;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.polycis.api.nb.puls.dao.UnionDeviceMapper;
-import com.polycis.api.nb.puls.entity.UnionDevice;
+import com.polycis.api.nb.entity.device.UnionDevice;
+import com.polycis.api.nb.mapper.device.UnionDeviceMapper;
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,7 +1,8 @@
 package com.polycis.api.nb.mapper.device;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.polycis.api.nb.puls.entity.UnionApp;
+import com.polycis.api.nb.entity.device.UnionApp;
+
 
 /**
  * <p>

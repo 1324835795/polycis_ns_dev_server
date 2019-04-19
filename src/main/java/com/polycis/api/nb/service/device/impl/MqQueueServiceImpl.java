@@ -2,8 +2,8 @@ package com.polycis.api.nb.service.device.impl;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.polycis.api.nb.puls.dao.MqQueueMapper;
-import com.polycis.api.nb.puls.entity.MqQueue;
+import com.polycis.api.nb.entity.device.MqQueue;
+import com.polycis.api.nb.mapper.device.MqQueueMapper;
 import org.springframework.stereotype.Service;
 
 /**

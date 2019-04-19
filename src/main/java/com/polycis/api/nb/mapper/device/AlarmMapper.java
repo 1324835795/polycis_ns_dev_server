@@ -1,7 +1,8 @@
 package com.polycis.api.nb.mapper.device;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.polycis.api.nb.puls.entity.Alarm;
+import com.polycis.api.nb.entity.device.Alarm;
+
 
 /**
  * <p>

@@ -2,8 +2,8 @@ package com.polycis.api.nb.service.device.impl;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.polycis.api.nb.puls.dao.AlarmMapper;
-import com.polycis.api.nb.puls.entity.Alarm;
+import com.polycis.api.nb.entity.device.Alarm;
+import com.polycis.api.nb.mapper.device.AlarmMapper;
 import org.springframework.stereotype.Service;
 
 /**

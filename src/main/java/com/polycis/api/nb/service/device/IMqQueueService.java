@@ -1,7 +1,8 @@
 package com.polycis.api.nb.service.device;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.polycis.api.nb.puls.entity.MqQueue;
+import com.polycis.api.nb.entity.device.MqQueue;
+
 
 /**
  * <p>

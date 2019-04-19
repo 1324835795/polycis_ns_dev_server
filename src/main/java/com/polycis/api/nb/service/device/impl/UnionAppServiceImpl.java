@@ -8,6 +8,9 @@ import com.polycis.api.nb.service.device.IUnionAppService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -23,10 +26,33 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
 
     @Override
     public boolean addApp(UnionApp appInfo) {
-
         //入库
         appInfo.setCreatTime(new Date());
         boolean b = this.insert(appInfo);
         return b;
     }
+
+    @Override
+    public boolean deleteApp(UnionApp appInfo) {
+        //删除应用
+        Map<String,Object> apply =new HashMap<> ();
+        apply.put("app_eui",appInfo.getAppEui());
+        boolean b = this.deleteByMap(apply);
+        return b;
+    }
+
+    @Override
+    public UnionApp appisExist(UnionApp appInfo) {
+        Map<String,Object> apply =new HashMap<> ();
+        apply.put("app_eui",appInfo.getAppEui());
+        List<UnionApp> unionApps = this.selectByMap(apply);
+        if(!unionApps.isEmpty()){
+            //应用存在
+            UnionApp unionApp = unionApps.get(0);
+            return unionApp;
+        }
+        return null;
+    }
+
+
 }

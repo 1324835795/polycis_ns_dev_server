@@ -18,6 +18,21 @@ public interface IUnionAppService extends IService<UnionApp> {
      * @param
      * @return
      */
-    boolean addApp(UnionApp deviceInfo);
+    boolean addApp(UnionApp appInfo);
+
+    /**
+     * 删除应用`
+     * @param
+     * @return
+     */
+    boolean deleteApp(UnionApp appInfo);
+
+
+    /**
+     * 查询应用是否存在`
+     * @param
+     * @return
+     */
+    UnionApp appisExist(UnionApp appInfo);
 
 }

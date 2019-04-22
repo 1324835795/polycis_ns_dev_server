@@ -28,11 +28,11 @@ public class UnionDevice implements Serializable {
     /**
      * 设备eui
      */
-    private String devEui;
+    private String devUuid;
     /**
      * 设备名称
      */
-    private String devName;
+    private String name;
     /**
      * 设备类型
      */
@@ -51,6 +51,8 @@ public class UnionDevice implements Serializable {
     private String priority;
 
 
+
+
     public Integer getId() {
         return id;
     }
@@ -59,20 +61,20 @@ public class UnionDevice implements Serializable {
         this.id = id;
     }
 
-    public String getDevEui() {
-        return devEui;
+    public String getDevUuid() {
+        return devUuid;
     }
 
-    public void setDevEui(String devEui) {
-        this.devEui = devEui;
+    public void setDevUuid(String devUuid) {
+        this.devUuid = devUuid;
     }
 
-    public String getDevName() {
-        return devName;
+    public String getName() {
+        return name;
     }
 
-    public void setDevName(String devName) {
-        this.devName = devName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -110,13 +112,13 @@ public class UnionDevice implements Serializable {
     @Override
     public String toString() {
         return "UnionDevice{" +
-        ", id=" + id +
-        ", devEui=" + devEui +
-        ", devName=" + devName +
-        ", type=" + type +
-        ", creatTime=" + creatTime +
-        ", devPro=" + devPro +
-        ", priority=" + priority +
-        "}";
+                "id=" + id +
+                ", devUuid='" + devUuid + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", creatTime=" + creatTime +
+                ", devPro='" + devPro + '\'' +
+                ", priority='" + priority + '\'' +
+                '}';
     }
 }

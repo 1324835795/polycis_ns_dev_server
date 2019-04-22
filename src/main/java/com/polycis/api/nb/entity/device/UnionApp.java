@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public class UnionApp implements Serializable {
     /**
      * 应用名称
      */
-    private String appName;
+    private String name;
     /**
      * lora设备id
      */
@@ -59,12 +60,12 @@ public class UnionApp implements Serializable {
         this.appEui = appEui;
     }
 
-    public String getAppName() {
-        return appName;
+    public String getName() {
+        return name;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getLoraAppId() {
@@ -86,11 +87,11 @@ public class UnionApp implements Serializable {
     @Override
     public String toString() {
         return "UnionApp{" +
-        ", id=" + id +
-        ", appEui=" + appEui +
-        ", appName=" + appName +
-        ", loraAppId=" + loraAppId +
-        ", creatTime=" + creatTime +
-        "}";
+                "id=" + id +
+                ", appEui='" + appEui + '\'' +
+                ", name='" + name + '\'' +
+                ", loraAppId=" + loraAppId +
+                ", creatTime=" + creatTime +
+                '}';
     }
 }

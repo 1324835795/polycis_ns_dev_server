@@ -28,7 +28,7 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
     public boolean addDev(UnionDevice unionDevice) {
 
         Map<String,Object> device =new HashMap<>();
-        device.put("dev_eui",unionDevice.getDevEui());
+        device.put("dev_uuid",unionDevice.getDevUuid());
         List<UnionDevice> unionDevices = this.selectByMap(device);
         if(unionDevices.isEmpty()){
             unionDevice.setCreatTime(new Date());
@@ -41,10 +41,13 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
     @Override
     public boolean deleteDev(UnionDevice unionDevice) {
         //删除设备
-        Map<String,Object> device =new HashMap<>();
-        device.put("dev_eui",unionDevice.getDevEui());
-        boolean b = this.deleteByMap(device);
-        return b;
+        if(unionDevice.getDevUuid()!=null){
+            Map<String,Object> device =new HashMap<>();
+            device.put("dev_uuid",unionDevice.getDevUuid());
+            boolean b = this.deleteByMap(device);
+            return b;
+        }
+        return false;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
 
         //查询设备
         Map<String,Object> device =new HashMap<>();
-        device.put("app_eui",unionDevice.getDevEui());
+        device.put("dev_uuid",unionDevice.getDevUuid());
         List<UnionDevice> unionApps = this.selectByMap(device);
         if(!unionApps.isEmpty()){
             //应用存在
@@ -61,5 +64,13 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
         }
         return null;
 
+    }
+
+
+    @Override
+    public UnionDevice updateDev(UnionDevice unionDevice) {
+        //修改设备
+        this.updateById(unionDevice);
+        return null;
     }
 }

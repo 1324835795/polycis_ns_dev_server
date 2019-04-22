@@ -40,11 +40,15 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
 
     @Override
     public boolean deleteApp(UnionApp appInfo) {
-        //删除应用
-        Map<String,Object> apply =new HashMap<> ();
-        apply.put("app_eui",appInfo.getAppEui());
-        boolean b = this.deleteByMap(apply);
-        return b;
+
+        if(appInfo.getAppEui()!=null){
+            //删除应用
+            Map<String,Object> apply =new HashMap<> ();
+            apply.put("app_eui",appInfo.getAppEui());
+            boolean b = this.deleteByMap(apply);
+            return b;
+        }
+        return false;
     }
 
     @Override

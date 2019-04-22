@@ -37,4 +37,11 @@ public interface IUnionDeviceService extends IService<UnionDevice> {
      */
     UnionDevice devisExist(UnionDevice unionDevice);
 
+    /**
+     * 修改设备
+     * @param
+     * @return
+     */
+    UnionDevice updateDev(UnionDevice unionDevice);
+
 }

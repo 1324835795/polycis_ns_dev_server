@@ -28,7 +28,7 @@ public class GeneratorServiceEntity {
 
         String packageName = "com.polycis.api.nb.puls";
         boolean serviceNameStartWithI = true;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "dev_mq_queue","dev_alarm","dev_union_app","dev_union_device");
+        generateByTables(serviceNameStartWithI, packageName, "dev_http");
     }
 
 

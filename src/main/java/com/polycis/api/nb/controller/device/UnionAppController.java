@@ -104,7 +104,6 @@ public class UnionAppController {
                 //未查到数据
                 apiResult.setCode(CommonCode.NO_DATA.getKey());
                 apiResult.setMsg(CommonCode.NO_DATA.getValue());
-                apiResult.setData(new UnionApp());
             }
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());

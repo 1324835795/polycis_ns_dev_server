@@ -38,27 +38,31 @@ public class UnionDeviceController {
     IUnionDeviceService iUnionDeviceService;
 
     /**
-     * 对外新增应用
+     * 对外新增设备
      * @param requestVO
      * @return
      */
     @PostMapping(value = "/addDevice")
-    public JSONObject addApp(@RequestBody RequestVO requestVO) {
+    public ApiResult addDevice(@RequestBody RequestVO requestVO) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
             Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionDev");
             UnionDevice unionDevice = JSON.parseObject(JSON.toJSONString(params), UnionDevice.class);
             boolean b = iUnionDeviceService.addDev(unionDevice);
             apiResult.setData(b);
+            if(b==false){
+                apiResult.setCode(CommonCode.ERROR.getKey());
+                apiResult.setMsg("设备已存在");
+            }
+
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("设备创建失败");
             Log.error(e.toString());
         }
-        JSONObject jsStr = JSONObject.parseObject(apiResult.toString());
-        return jsStr;
-    }
 
+        return apiResult;
+    }
 
 
     /**
@@ -67,7 +71,7 @@ public class UnionDeviceController {
      * @return String
      */
     @PostMapping(value = "/deleteDev")
-    public JSONObject deleteApp(@RequestBody RequestVO requestVO) {
+    public ApiResult deleteApp(@RequestBody RequestVO requestVO) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
             Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionDev");
@@ -79,9 +83,41 @@ public class UnionDeviceController {
             apiResult.setMsg("删除设备失败");
             Log.error(e.toString());
         }
-        JSONObject jsStr = JSONObject.parseObject(apiResult.toString());
-        return jsStr;
+
+        return apiResult;
     }
+
+
+    /**
+     * 查询设备
+     * @param requestVO
+     * @return String
+     */
+    @PostMapping(value = "/devisExist")
+    public ApiResult selectDev(@RequestBody RequestVO requestVO) {
+        ApiResult<UnionDevice> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
+        try {
+            Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionDev");
+            UnionDevice device = JSON.parseObject(JSON.toJSONString(params), UnionDevice.class);
+            UnionDevice unionDevice = iUnionDeviceService.devisExist(device);
+
+            if(unionDevice!=null){
+                //查询到设备
+                apiResult.setData(unionDevice);
+            }else{
+                //未查到数据
+                apiResult.setCode(CommonCode.NO_DATA.getKey());
+                apiResult.setMsg(CommonCode.NO_DATA.getValue());
+                apiResult.setData(new UnionDevice());
+            }
+        }catch (Exception e){
+            apiResult.setCode(CommonCode.ERROR.getKey());
+            apiResult.setMsg("查询应用失败");
+            Log.error(e.toString());
+        }
+        return apiResult;
+    }
+
 
 }
 

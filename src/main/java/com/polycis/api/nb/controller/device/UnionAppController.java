@@ -44,7 +44,7 @@ public class UnionAppController {
      * @return
      */
     @PostMapping(value = "/addApply")
-    public JSONObject addApp(@RequestBody RequestVO requestVO) {
+    public ApiResult addApp(@RequestBody RequestVO requestVO) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
             Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionApp");
@@ -52,13 +52,16 @@ public class UnionAppController {
             boolean b = iUnionAppService.addApp(appInfo);
             System.out.println(appInfo.getAppName());
             apiResult.setData(b);
+            if(b==false){
+                apiResult.setCode(CommonCode.ERROR.getKey());
+                apiResult.setMsg("应用已存在");
+            }
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("应用创建失败");
             Log.error(e.toString());
         }
-        JSONObject jsStr = JSONObject.parseObject(apiResult.toString());
-        return jsStr;
+        return apiResult;
     }
 
     /**
@@ -67,7 +70,7 @@ public class UnionAppController {
      * @return String
      */
     @PostMapping(value = "/deleteApply")
-    public JSONObject deleteApp(@RequestBody RequestVO requestVO) {
+    public ApiResult deleteApp(@RequestBody RequestVO requestVO) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
             Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionApp");
@@ -79,24 +82,23 @@ public class UnionAppController {
             apiResult.setMsg("删除应用失败");
             Log.error(e.toString());
         }
-        JSONObject jsStr = JSONObject.parseObject(apiResult.toString());
-        return jsStr;
+        return apiResult;
     }
 
     /**
-     * 查询
+     * 查询应用
      * @param requestVO
      * @return String
      */
     @PostMapping(value = "/appisExist")
-    public JSONObject selectApp(@RequestBody RequestVO requestVO) {
+    public ApiResult selectApp(@RequestBody RequestVO requestVO) {
         ApiResult<UnionApp> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
             Map<String, Object> params = (Map<String, Object>)requestVO.getData().get("unionApp");
             UnionApp appInfo = JSON.parseObject(JSON.toJSONString(params), UnionApp.class);
             UnionApp unionApp = iUnionAppService.appisExist(appInfo);
             if(unionApp!=null){
-                //查询到设备
+                //查询到应用
                 apiResult.setData(unionApp);
             }else{
                 //未查到数据
@@ -109,8 +111,8 @@ public class UnionAppController {
             apiResult.setMsg("查询应用失败");
             Log.error(e.toString());
         }
-        JSONObject jsStr = JSONObject.parseObject(apiResult.toString());
-        return jsStr;
+
+        return apiResult;
     }
 
 

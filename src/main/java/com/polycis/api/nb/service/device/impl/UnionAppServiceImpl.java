@@ -27,9 +27,15 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
     @Override
     public boolean addApp(UnionApp appInfo) {
         //入库
-        appInfo.setCreatTime(new Date());
-        boolean b = this.insert(appInfo);
-        return b;
+        Map<String,Object> apply =new HashMap<> ();
+        apply.put("app_eui",appInfo.getAppEui());
+        List<UnionApp> unionApps = this.selectByMap(apply);
+        if(unionApps.isEmpty()){
+            appInfo.setCreatTime(new Date());
+            boolean b = this.insert(appInfo);
+            return b;
+        }
+        return false;
     }
 
     @Override

@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * <p>
  *  前端控制器
@@ -39,6 +36,16 @@ public class UnionAppController {
     IUnionAppService iUnionAppService;
 
     /**
+     人生就像一场戏，因为有缘才相聚。
+     相扶到老不容易，是否更该去珍惜。
+     为了小事发脾气，回头想想又何必。
+     别人生气我不气，气出病来无人替。
+     我若生气谁如意，况且伤神又费力。
+     邻居亲朋不要比，儿孙琐事由他去。
+     吃苦享乐在一起，神仙羡慕好伴侣。
+     */
+
+    /**
      * 对外新增应用
      * @param appInfo
      * @return
@@ -52,8 +59,9 @@ public class UnionAppController {
             apiResult.setData(b);
             if (b == false) {
                 apiResult.setCode(CommonCode.ERROR.getKey());
-                apiResult.setMsg("应用已存在");
+                apiResult.setMsg("应用已存在,创建失败");
             }
+
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("应用创建失败");
@@ -110,6 +118,32 @@ public class UnionAppController {
         }
         return apiResult;
     }
+
+    /**
+     * 修改应用信息(应用与lora接入平台绑定)
+     * @param appInfo
+     * @return
+     */
+    @PostMapping(value = "/updateApply")
+    public ApiResult updateApp(@RequestBody UnionApp appInfo) {
+        ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
+        try {
+            boolean b = iUnionAppService.updateApp(appInfo);
+            apiResult.setData(b);
+            if (b == false) {
+                apiResult.setCode(CommonCode.ERROR.getKey());
+                apiResult.setMsg("更新应用失败");
+            }
+
+        } catch (Exception e) {
+            apiResult.setCode(CommonCode.ERROR.getKey());
+            apiResult.setMsg("应用创建失败");
+            Log.error(e.toString());
+        }
+        return apiResult;
+    }
+
+
 
 }
 

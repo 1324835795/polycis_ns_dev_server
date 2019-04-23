@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface IHttpService extends IService<Http> {
 
+    /**
+     * 新增http地址链接
+     * @param
+     * @return
+     */
+    boolean addHttp(Http httpinfo);
 }

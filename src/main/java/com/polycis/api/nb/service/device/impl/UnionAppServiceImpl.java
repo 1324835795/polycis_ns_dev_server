@@ -2,9 +2,12 @@ package com.polycis.api.nb.service.device.impl;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.polycis.api.nb.entity.device.Http;
+import com.polycis.api.nb.entity.device.MqQueue;
 import com.polycis.api.nb.entity.device.UnionApp;
 import com.polycis.api.nb.mapper.device.UnionAppMapper;
 import com.polycis.api.nb.service.device.IUnionAppService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -23,6 +26,11 @@ import java.util.Map;
 @Service
 public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> implements IUnionAppService {
 
+    @Autowired
+    MqQueueServiceImpl mqQueueService;
+    @Autowired
+    HttpServiceImpl httpService;
+
 
     @Override
     public boolean addApp(UnionApp appInfo) {
@@ -33,6 +41,24 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
         if(unionApps.isEmpty()){
             appInfo.setCreatTime(new Date());
             boolean b = this.insert(appInfo);
+            if(b){
+                //生成两个推送地址
+                MqQueue mq = new MqQueue();
+                MqQueue mq2 = new MqQueue();
+                Http http = new Http();
+                mq.setAppEui(appInfo.getAppEui());
+                mq.setPriority(1);
+                mq2.setAppEui(appInfo.getAppEui());
+                mq2.setPriority(2);
+                //生成http推送地址
+                if(appInfo.getHttp()!=null){
+                    http.setAppEui(appInfo.getAppEui());
+                    http.setHttpName(appInfo.getHttp());
+                    httpService.addHttp(http);
+                }
+                mqQueueService.addMqQueue(mq);
+                mqQueueService.addMqQueue(mq2);
+            }
             return b;
         }
         return false;
@@ -52,6 +78,22 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
     }
 
     @Override
+    public boolean updateApp(UnionApp appInfo) {
+        if(appInfo.getAppEui()!=null){
+            //修改应用
+            Map<String,Object> apply =new HashMap<> ();
+            apply.put("app_eui",appInfo.getAppEui());
+            List<UnionApp> unionApps = this.selectByMap(apply);
+            UnionApp unionApp = unionApps.get(0);
+            unionApp.setLoraAppId(appInfo.getLoraAppId());
+            boolean b = this.updateById(unionApp);
+            return b;
+        }
+
+        return false;
+    }
+
+    @Override
     public UnionApp appisExist(UnionApp appInfo) {
         Map<String,Object> apply =new HashMap<> ();
         apply.put("app_eui",appInfo.getAppEui());
@@ -59,6 +101,19 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
         if(!unionApps.isEmpty()){
             //应用存在
             UnionApp unionApp = unionApps.get(0);
+            Map<String,Object> http =new HashMap<> ();
+            http.put("app_eui",appInfo.getAppEui());
+            List<Http> https = httpService.selectByMap(http);
+            unionApp.setHttp(https.get(0).getHttpName());
+
+            Map<String,Object> mq =new HashMap<> ();
+            mq.put("app_eui",appInfo.getAppEui());
+            mq.put("priority",1);
+            List<MqQueue> mqQueues = mqQueueService.selectByMap(mq);
+
+            if(!mqQueues.isEmpty()){
+                unionApp.setMqQueue(mqQueues.get(0).getQueueName());
+            }
             return unionApp;
         }
         return null;

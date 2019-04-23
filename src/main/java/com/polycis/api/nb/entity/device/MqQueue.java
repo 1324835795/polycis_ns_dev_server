@@ -27,7 +27,7 @@ public class MqQueue implements Serializable {
     /**
      * 应用id
      */
-    private Integer appId;
+    private String appEui;
     /**
      * 队列名称
      */
@@ -38,6 +38,7 @@ public class MqQueue implements Serializable {
     private Integer priority;
 
 
+
     public Integer getId() {
         return id;
     }
@@ -46,13 +47,15 @@ public class MqQueue implements Serializable {
         this.id = id;
     }
 
-    public Integer getAppId() {
-        return appId;
+    public String getAppEui() {
+        return appEui;
     }
 
-    public void setAppId(Integer appId) {
-        this.appId = appId;
+    public void setAppEui(String appEui) {
+        this.appEui = appEui;
     }
+
+
 
     public String getQueueName() {
         return queueName;
@@ -73,10 +76,10 @@ public class MqQueue implements Serializable {
     @Override
     public String toString() {
         return "MqQueue{" +
-        ", id=" + id +
-        ", appId=" + appId +
-        ", queueName=" + queueName +
-        ", priority=" + priority +
-        "}";
+                "id=" + id +
+                ", appEui=" + appEui +
+                ", queueName='" + queueName + '\'' +
+                ", priority=" + priority +
+                '}';
     }
 }

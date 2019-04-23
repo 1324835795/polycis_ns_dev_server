@@ -3,6 +3,7 @@ package com.polycis.api.nb.service.device;
 import com.baomidou.mybatisplus.service.IService;
 import com.polycis.api.nb.entity.device.UnionApp;
 import com.polycis.api.nb.entity.device.UnionDevice;
+import com.polycis.api.nb.entity.device.vo.DevQueueVO;
 
 
 /**
@@ -43,5 +44,13 @@ public interface IUnionDeviceService extends IService<UnionDevice> {
      * @return
      */
     UnionDevice updateDev(UnionDevice unionDevice);
+
+
+    /**
+     * 查询设备推送队列
+     * @param
+     * @return
+     */
+    DevQueueVO deviQueue(UnionDevice unionDevice);
 
 }

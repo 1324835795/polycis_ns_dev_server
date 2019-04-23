@@ -12,4 +12,9 @@ public class LoraDataServiceHystrix implements LorDataService {
     public String getLoraList(Integer id, String name) {
         return apiResult.toString();
     }
+
+    @Override
+    public String test(Integer id, String name) {
+        return null;
+    }
 }

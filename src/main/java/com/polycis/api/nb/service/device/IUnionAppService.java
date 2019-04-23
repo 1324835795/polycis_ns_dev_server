@@ -29,6 +29,14 @@ public interface IUnionAppService extends IService<UnionApp> {
 
 
     /**
+     * 修改应用`
+     * @param
+     * @return
+     */
+    boolean updateApp(UnionApp appInfo);
+
+
+    /**
      * 查询应用是否存在`
      * @param
      * @return

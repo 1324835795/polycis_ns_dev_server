@@ -26,9 +26,14 @@ public class UnionDevice implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
-     * 设备eui
+     * 设备uuid
      */
     private String devUuid;
+    /**
+     * 应用eui
+     */
+    private String appEui;
+
     /**
      * 设备名称
      */
@@ -50,8 +55,39 @@ public class UnionDevice implements Serializable {
      */
     private String priority;
 
+    /**
+     * 设备状态啥
+     */
+    private String status;
 
+    /**
+     * 优先级推送队列
+     */
+    private String queue;
 
+    public String getQueue() {
+        return queue;
+    }
+
+    public void setQueue(String queue) {
+        this.queue = queue;
+    }
+
+    public String getAppEui() {
+        return appEui;
+    }
+
+    public void setAppEui(String appEui) {
+        this.appEui = appEui;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -114,11 +150,14 @@ public class UnionDevice implements Serializable {
         return "UnionDevice{" +
                 "id=" + id +
                 ", devUuid='" + devUuid + '\'' +
+                ", appEui='" + appEui + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", creatTime=" + creatTime +
                 ", devPro='" + devPro + '\'' +
                 ", priority='" + priority + '\'' +
+                ", status='" + status + '\'' +
+                ", queue='" + queue + '\'' +
                 '}';
     }
 }

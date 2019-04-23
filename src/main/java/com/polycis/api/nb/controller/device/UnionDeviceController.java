@@ -8,16 +8,15 @@ import com.polycis.api.nb.common.CommonCode;
 import com.polycis.api.nb.common.vo.RequestVO;
 import com.polycis.api.nb.entity.device.UnionApp;
 import com.polycis.api.nb.entity.device.UnionDevice;
+import com.polycis.api.nb.entity.device.vo.DevQueueVO;
 import com.polycis.api.nb.service.device.IUnionAppService;
 import com.polycis.api.nb.service.device.IUnionDeviceService;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -138,6 +137,40 @@ public class UnionDeviceController {
 
         return apiResult;
     }
+
+
+
+    /**
+     * 查询设备推送队列
+     * @param
+     * @return String
+     */
+    @PostMapping(value = "/devPushQueue")
+    public ApiResult devPushQueue(@RequestParam (value = "devUuid", required = true)String devUuid) {
+        ApiResult<DevQueueVO> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
+        try {
+            UnionDevice device = new UnionDevice();
+            device.setDevUuid(devUuid);
+            UnionDevice unionDevice = iUnionDeviceService.devisExist(device);
+
+            if(unionDevice!=null){
+                //查询到设备
+                DevQueueVO devQueueVO = iUnionDeviceService.deviQueue(unionDevice);
+                apiResult.setData(devQueueVO);
+            }else{
+                //未查到数据
+                apiResult.setCode(CommonCode.NO_DATA.getKey());
+                apiResult.setMsg(CommonCode.NO_DATA.getValue());
+            }
+        }catch (Exception e){
+            apiResult.setCode(CommonCode.ERROR.getKey());
+            apiResult.setMsg("查询设备推送队列失败");
+            Log.error(e.toString());
+        }
+        return apiResult;
+    }
+
+
 
 
 }

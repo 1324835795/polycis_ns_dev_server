@@ -2,8 +2,6 @@ spring:
   application:
     name: polycis-ns-dev-server
   cloud:
-    inetutils:
-      useOnlySiteLocalInterfaces: true
     client:
       ipAddress: 192.168.15.138
 server:
@@ -13,21 +11,6 @@ server:
     max-threads: 200
     connection-timeout: 5000
     acceptCount: 100
-
-#eureka:
-#  client:
-#    healthcheck:
-#      enable: true
-#    registryFetchIntervalSeconds: 30
-#    serviceUrl:
-#      defaultZone: http://59.110.225.90:8761/eureka/
-#  instance:
-#
-#    lease-expiration-duration-in-seconds: 90
-#    leaseRenewalIntervalInSeconds: 30
-#    preferIpAddress: true
-
-
 eureka:
   client:
     serviceUrl:

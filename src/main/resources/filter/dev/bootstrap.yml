@@ -2,6 +2,8 @@ spring:
   application:
     name: polycis-ns-dev-server
   cloud:
+    inetutils:
+      useOnlySiteLocalInterfaces: true
     client:
       ipAddress: 192.168.15.1660
 server:

@@ -50,7 +50,7 @@ public class UnionAppController {
      * @param appInfo
      * @return
      */
-    @PostMapping(value = "/addApply")
+    @PostMapping(value = "/addApp")
     public ApiResult addApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
@@ -75,17 +75,20 @@ public class UnionAppController {
      * @param appInfo
      * @return String
      */
-    @PostMapping(value = "/deleteApply")
+    @PostMapping(value = "/deleteApp")
     public ApiResult deleteApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
-            boolean b = iUnionAppService.deleteApp(appInfo);
-            apiResult.setData(b);
-            if(b==false){
-                apiResult.setCode(CommonCode.NO_DATA.getKey());
-                apiResult.setMsg("应用不存在,删除失败");
+            Integer i = iUnionAppService.deleteApply(appInfo);
+            if(i==200){
+                apiResult.setData(true);
+            }else if(i==401){
+                apiResult.setCode(CommonCode.PARAMETER_LOSE.getKey());
+                apiResult.setMsg("应用存在设备,不允许删除");
+            }else{
+                apiResult.setCode(CommonCode.ERROR.getKey());
+                apiResult.setMsg("删除应用失败");
             }
-
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("删除应用失败");
@@ -125,7 +128,7 @@ public class UnionAppController {
      * @param appInfo
      * @return
      */
-    @PostMapping(value = "/updateApply")
+    @PostMapping(value = "/updateApp")
     public ApiResult updateApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
@@ -143,8 +146,6 @@ public class UnionAppController {
         }
         return apiResult;
     }
-
-
 
 }
 

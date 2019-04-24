@@ -149,6 +149,7 @@ public class UnionDeviceController {
     public ApiResult devPushQueue(@RequestParam (value = "devUuid", required = true)String devUuid) {
         ApiResult<DevQueueVO> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
+            Log.info("设备进来"+devUuid);
             UnionDevice device = new UnionDevice();
             device.setDevUuid(devUuid);
             UnionDevice unionDevice = iUnionDeviceService.devisExist(device);

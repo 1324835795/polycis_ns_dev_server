@@ -5,8 +5,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.polycis.api.nb.entity.device.Http;
 import com.polycis.api.nb.entity.device.MqQueue;
 import com.polycis.api.nb.entity.device.UnionApp;
+import com.polycis.api.nb.entity.device.UnionDevice;
 import com.polycis.api.nb.mapper.device.UnionAppMapper;
+import com.polycis.api.nb.service.device.IHttpService;
+import com.polycis.api.nb.service.device.IMqQueueService;
 import com.polycis.api.nb.service.device.IUnionAppService;
+import com.polycis.api.nb.service.device.IUnionDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +31,11 @@ import java.util.Map;
 public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> implements IUnionAppService {
 
     @Autowired
-    MqQueueServiceImpl mqQueueService;
+    IMqQueueService mqQueueService;
     @Autowired
-    HttpServiceImpl httpService;
+    IHttpService httpService;
+    @Autowired
+    IUnionDeviceService iUnionDeviceService;
 
 
     @Override
@@ -75,6 +81,37 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
             return b;
         }
         return false;
+    }
+
+    @Override
+    public Integer deleteApply(UnionApp appInfo) {
+
+        if(appInfo.getAppEui()!=null){
+
+            String appEui = appInfo.getAppEui();
+            Map<String,Object> apply =new HashMap<> ();
+            apply.put("app_eui",appEui);
+            //查询应用下是否有设备
+            List<UnionDevice> unionDevices = iUnionDeviceService.selectByMap(apply);
+
+            if(unionDevices.size()>0){
+                //设备存在不能删除应用
+                return 401;
+            }else{
+                List<UnionApp> unionApps = this.selectByMap(apply);
+                if(!unionApps.isEmpty()){
+                    Integer id = unionApps.get(0).getId();
+                    boolean b = this.deleteById(id);
+                    if(b){
+                        //删除应用下的队列名与mq
+                        mqQueueService.deleteByMap(apply);
+                        httpService.deleteByMap(apply);
+                        return 200;
+                    }
+                }
+            }
+        }
+        return 0;
     }
 
     @Override

@@ -27,6 +27,13 @@ public interface IUnionAppService extends IService<UnionApp> {
      */
     boolean deleteApp(UnionApp appInfo);
 
+    /**
+     * 删除应用`
+     * @param
+     * @return
+     */
+    Integer deleteApply(UnionApp appInfo);
+
 
     /**
      * 修改应用`

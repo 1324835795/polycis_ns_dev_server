@@ -61,8 +61,14 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
         if(unionDevice.getDevUuid()!=null){
             Map<String,Object> device =new HashMap<>();
             device.put("dev_uuid",unionDevice.getDevUuid());
-            boolean b = this.deleteByMap(device);
-            return b;
+            List<UnionDevice> unionDevices = this.selectByMap(device);
+            if(!unionDevices.isEmpty()){
+                Integer id = unionDevices.get(0).getId();
+                boolean b = this.deleteById(id);
+                return b;
+            }
+            return false;
+
         }
         return false;
     }
@@ -100,7 +106,7 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
         if(priority.equals("2")){
             devQueueVO.setQueueNameApp(unionDevice.getQueue());
             return devQueueVO;
-        }else{
+        }else {
 
             String appEui = unionDevice.getAppEui();
             Map<String,Object> apply =new HashMap<>();
@@ -114,23 +120,20 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
                     String httpName = https.get(0).getHttpName();
                     devQueueVO.setHttpApp(httpName);
                     return devQueueVO;
-                }else{
+                }else if(unionApp.getPushType()==2){
                     //mq正常推送地址
                     Map<String,Object> mq =new HashMap<>();
                     mq.put("app_eui",appEui);
                     mq.put("priority",1);
-
                     List<MqQueue> mqQueues = iMqQueueService.selectByMap(mq);
                     String queueName = mqQueues.get(0).getQueueName();
                     devQueueVO.setQueueNameApp(queueName);
                     return devQueueVO;
-
+                }else{
+                    return devQueueVO;
                 }
-
             }
-
             return devQueueVO;
         }
-
     }
 }

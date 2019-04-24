@@ -107,7 +107,7 @@ public class UnionDeviceController {
                 //未查到数据
                 apiResult.setCode(CommonCode.NO_DATA.getKey());
                 apiResult.setMsg(CommonCode.NO_DATA.getValue());
-                apiResult.setData(new UnionDevice());
+
             }
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());

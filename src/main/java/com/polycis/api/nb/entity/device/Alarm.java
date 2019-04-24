@@ -29,6 +29,7 @@ public class Alarm implements Serializable {
      * 设备eui
      */
     private String devEui;
+
     /**
      * 设备类型
      */

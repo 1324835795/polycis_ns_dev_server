@@ -85,6 +85,7 @@ public class UnionAppController {
                 apiResult.setCode(CommonCode.NO_DATA.getKey());
                 apiResult.setMsg("应用不存在,删除失败");
             }
+
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("删除应用失败");
@@ -137,7 +138,7 @@ public class UnionAppController {
 
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
-            apiResult.setMsg("应用创建失败");
+            apiResult.setMsg("应用修改失败");
             Log.error(e.toString());
         }
         return apiResult;

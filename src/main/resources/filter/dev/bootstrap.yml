@@ -3,7 +3,7 @@ spring:
     name: polycis-ns-dev-server
   cloud:
     client:
-      ipAddress: 192.168.15.138
+      ipAddress: 192.168.15.1660
 server:
   port: 10001
   tomcat:

@@ -55,7 +55,7 @@ public class UnionAppController {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
             boolean b = iUnionAppService.addApp(appInfo);
-            System.out.println(appInfo.getName());
+            Log.info("得到appEui"+appInfo.getAppEui());
             apiResult.setData(b);
             if (b == false) {
                 apiResult.setCode(CommonCode.ERROR.getKey());
@@ -79,8 +79,10 @@ public class UnionAppController {
     public ApiResult deleteApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
+            Log.info("得到appEui"+appInfo.getAppEui());
             Integer i = iUnionAppService.deleteApply(appInfo);
             if(i==200){
+                Log.info("删除设备成功");
                 apiResult.setData(true);
             }else if(i==401){
                 apiResult.setCode(CommonCode.PARAMETER_LOSE.getKey());
@@ -106,6 +108,7 @@ public class UnionAppController {
     public ApiResult selectApp (@RequestBody UnionApp appInfo){
         ApiResult<UnionApp> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
+            Log.info("得到appEui"+appInfo.getAppEui());
             UnionApp unionApp = iUnionAppService.appisExist(appInfo);
             if (unionApp != null) {
                 //查询到应用
@@ -132,6 +135,7 @@ public class UnionAppController {
     public ApiResult updateApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
+            Log.info("得到appEui"+appInfo.getAppEui());
             boolean b = iUnionAppService.updateApp(appInfo);
             apiResult.setData(b);
             if (b == false) {

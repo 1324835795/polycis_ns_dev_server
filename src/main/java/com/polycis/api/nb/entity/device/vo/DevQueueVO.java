@@ -17,6 +17,20 @@ public class DevQueueVO {
     private String queueNameApp;
 
 
+    /**
+     * 优先级[1,2,3,4,5,6....255]
+     * 默认10
+     * */
+    private Integer priority;
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
     public String getDevUuid() {
         return devUuid;
     }

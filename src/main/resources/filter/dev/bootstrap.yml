@@ -2,8 +2,9 @@ spring:
   application:
     name: polycis-ns-dev-server
   cloud:
-    client:
-      ipAddress: 192.168.15.138
+    inetutils:
+      #强制使用站点本地地址
+      use-only-site-local-interfaces: true
 server:
   port: 10001
   tomcat:
@@ -16,5 +17,9 @@ eureka:
     serviceUrl:
       defaultZone: http://59.110.225.90:8761/eureka/
   instance:
-    preferIpAddress: true
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    #告诉服务端，如果我20s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+    lease-expiration-duration-in-seconds: 20
+    #每间隔10s，向服务端发送一次心跳，证明自己依然”存活“
+    leaseRenewalIntervalInSeconds: 10
+    #用IP注册服务，默认是机器名称
+    prefer-ip-address: true

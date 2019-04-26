@@ -104,8 +104,36 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
         String priority = unionDevice.getPriority();
         //优先级设备
         if(priority.equals("2")){
-            devQueueVO.setQueueNameApp(unionDevice.getQueue());
+            String appEui = unionDevice.getAppEui();
+            Map<String,Object> apply =new HashMap<>();
+            apply.put("app_eui",appEui);
+            List<UnionApp> unionApps = iUnionAppService.selectByMap(apply);
+            if(!unionApps.isEmpty()){
+                UnionApp unionApp = unionApps.get(0);
+                if(unionApp.getPushType()==1){
+                    //http推送地址
+                    List<Http> https = iHttpService.selectByMap(apply);
+                    String httpName = https.get(0).getHttpName();
+                    devQueueVO.setHttpApp(httpName);
+                    devQueueVO.setPriority(10);
+                    return devQueueVO;
+                }else if(unionApp.getPushType()==2){
+                    //mq正常推送地址
+                    Map<String,Object> mq =new HashMap<>();
+                    mq.put("app_eui",appEui);
+                    mq.put("priority",1);
+                    List<MqQueue> mqQueues = iMqQueueService.selectByMap(mq);
+                    String queueName = mqQueues.get(0).getQueueName();
+                    devQueueVO.setQueueNameApp(queueName);
+                    devQueueVO.setPriority(10);
+                    return devQueueVO;
+                }else{
+                    return devQueueVO;
+                }
+            }
             return devQueueVO;
+
+            //devQueueVO.setQueueNameApp(unionDevice.getQueue());
         }else {
 
             String appEui = unionDevice.getAppEui();

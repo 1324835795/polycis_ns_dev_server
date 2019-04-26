@@ -2,6 +2,10 @@ package com.polycis.api.nb.service.device.impl;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.polycis.api.nb.client.app.AppServiceClient;
+import com.polycis.api.nb.common.ApiResult;
+import com.polycis.api.nb.common.CommonCode;
+import com.polycis.api.nb.controller.device.UnionAppController;
 import com.polycis.api.nb.entity.device.Http;
 import com.polycis.api.nb.entity.device.MqQueue;
 import com.polycis.api.nb.entity.device.UnionApp;
@@ -11,6 +15,8 @@ import com.polycis.api.nb.service.device.IHttpService;
 import com.polycis.api.nb.service.device.IMqQueueService;
 import com.polycis.api.nb.service.device.IUnionAppService;
 import com.polycis.api.nb.service.device.IUnionDeviceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +36,16 @@ import java.util.Map;
 @Service
 public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> implements IUnionAppService {
 
+
+    protected static Logger Log = LoggerFactory.getLogger(UnionAppServiceImpl.class);
     @Autowired
     IMqQueueService mqQueueService;
     @Autowired
     IHttpService httpService;
     @Autowired
     IUnionDeviceService iUnionDeviceService;
+    @Autowired
+    AppServiceClient appServiceClient;
 
 
     @Override
@@ -99,7 +109,26 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
                 return 401;
             }else{
                 List<UnionApp> unionApps = this.selectByMap(apply);
+                //判断app是否为空
                 if(!unionApps.isEmpty()){
+                   //判断goService是否为空
+                    if(unionApps.get(0).getLoraAppId()!=null){
+                        //不为空去goservice删除应用
+                        ApiResult apiResult = appServiceClient.deleteApplicationById(appEui);
+                        if(apiResult.getCode()== CommonCode.SUCCESS.getKey()){
+                            Integer id = unionApps.get(0).getId();
+                            boolean b = this.deleteById(id);
+                            if(b){
+                                //删除应用下的队列名与mq
+                                mqQueueService.deleteByMap(apply);
+                                httpService.deleteByMap(apply);
+                                return 200;
+                            }
+                        }
+                        Log.info("GoService删除失败, "+apiResult.getMsg());
+                        return 0;
+                    }
+
                     Integer id = unionApps.get(0).getId();
                     boolean b = this.deleteById(id);
                     if(b){

@@ -45,7 +45,7 @@ public class UnionDeviceController {
     public ApiResult addDevice(@RequestBody UnionDevice unionDevice) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
-
+            Log.info("得到appEui"+unionDevice.getDevUuid());
             boolean b = iUnionDeviceService.addDev(unionDevice);
             apiResult.setData(b);
             if(b==false){
@@ -72,7 +72,7 @@ public class UnionDeviceController {
     public ApiResult deleteApp(@RequestBody UnionDevice unionDevice) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
-
+            Log.info("得到appEui"+unionDevice.getDevUuid());
             boolean b = iUnionDeviceService.deleteDev(unionDevice);
             apiResult.setData(b);
             if(b==false){
@@ -100,7 +100,7 @@ public class UnionDeviceController {
     public ApiResult selectDev(@RequestBody UnionDevice device) {
         ApiResult<UnionDevice> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
-
+            Log.info("得到appEui"+device.getDevUuid());
             UnionDevice unionDevice = iUnionDeviceService.devisExist(device);
             if(unionDevice!=null){
                 //查询到设备
@@ -121,7 +121,7 @@ public class UnionDeviceController {
 
 
     /**
-     * 修改设备状态
+     * 修改设备状态(未完成)
      * @param device
      * @return String
      */
@@ -136,10 +136,8 @@ public class UnionDeviceController {
             apiResult.setMsg("修改设备失败");
             Log.error(e.toString());
         }
-
         return apiResult;
     }
-
 
 
     /**

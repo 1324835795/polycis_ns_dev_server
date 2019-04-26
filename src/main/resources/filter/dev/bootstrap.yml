@@ -3,8 +3,9 @@ spring:
     name: polycis-ns-dev-server
   cloud:
     inetutils:
-      #强制使用站点本地地址
-      use-only-site-local-interfaces: true
+      #过滤ip网段，多个网卡可以采用这种方式配置
+      preferredNetworks:
+        - 192.168.10
 server:
   port: 10001
   tomcat:

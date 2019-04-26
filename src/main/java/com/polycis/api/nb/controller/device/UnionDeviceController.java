@@ -45,6 +45,7 @@ public class UnionDeviceController {
     public ApiResult addDevice(@RequestBody UnionDevice unionDevice) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
+
             boolean b = iUnionDeviceService.addDev(unionDevice);
             apiResult.setData(b);
             if(b==false){
@@ -77,6 +78,7 @@ public class UnionDeviceController {
             if(b==false){
                 apiResult.setCode(CommonCode.NO_DATA.getKey());
                 apiResult.setMsg("设备不存在,删除失败");
+                Log.info("删除失败");
             }
 
         }catch (Exception e){

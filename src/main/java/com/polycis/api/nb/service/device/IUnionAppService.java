@@ -8,7 +8,7 @@ import com.polycis.api.nb.entity.device.UnionApp;
  *  服务类
  * </p>
  *
- * @author ${author}
+ * @author cuiwenhao
  * @since 2019-04-19
  */
 public interface IUnionAppService extends IService<UnionApp> {

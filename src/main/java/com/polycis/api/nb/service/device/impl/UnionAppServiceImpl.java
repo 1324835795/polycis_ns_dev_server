@@ -97,7 +97,6 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
     public Integer deleteApply(UnionApp appInfo) {
 
         if(appInfo.getAppEui()!=null){
-
             String appEui = appInfo.getAppEui();
             Map<String,Object> apply =new HashMap<> ();
             apply.put("app_eui",appEui);
@@ -128,7 +127,6 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
                         Log.info("GoService删除失败, "+apiResult.getMsg());
                         return 0;
                     }
-
                     Integer id = unionApps.get(0).getId();
                     boolean b = this.deleteById(id);
                     if(b){

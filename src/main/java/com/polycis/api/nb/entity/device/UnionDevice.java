@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * </p>
  *
- * @author ${author}
+ * @author cuiwenhao
  * @since 2019-04-18
  */
 @TableName("dev_union_device")

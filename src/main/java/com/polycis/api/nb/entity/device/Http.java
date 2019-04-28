@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author ${author}
+ * @author cuiwenhao
  * @since 2019-04-22
  */
 @TableName("dev_http")

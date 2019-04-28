@@ -9,7 +9,7 @@ import com.polycis.api.nb.entity.device.MqQueue;
  *  Mapper 接口
  * </p>
  *
- * @author ${author}
+ * @author cuiwenhao
  * @since 2019-04-18
  */
 public interface MqQueueMapper extends BaseMapper<MqQueue> {

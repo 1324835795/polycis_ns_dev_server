@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.service.IService;
  *  服务类
  * </p>
  *
- * @author ${author}
+ * @author cuiwenhao
  * @since 2019-04-22
  */
 public interface IHttpService extends IService<Http> {

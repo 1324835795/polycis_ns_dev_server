@@ -55,6 +55,7 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
         apply.put("app_eui",appInfo.getAppEui());
         List<UnionApp> unionApps = this.selectByMap(apply);
         if(unionApps.isEmpty()){
+            Log.info("应用不存在,允许创建"+appInfo.toString());
             appInfo.setCreatTime(new Date());
             boolean b = this.insert(appInfo);
             if(b){

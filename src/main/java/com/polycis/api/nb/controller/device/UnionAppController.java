@@ -58,6 +58,7 @@ public class UnionAppController {
             Log.info("得到appEui"+appInfo.getAppEui());
             apiResult.setData(b);
             if (b == false) {
+                Log.info("应用存在创建失败");
                 apiResult.setCode(CommonCode.ERROR.getKey());
                 apiResult.setMsg("应用已存在,创建失败");
             }

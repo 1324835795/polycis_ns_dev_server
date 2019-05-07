@@ -83,7 +83,7 @@ public class UnionAppController {
             Log.info("得到appEui"+appInfo.getAppEui());
             Integer i = iUnionAppService.deleteApply(appInfo);
             if(i==200){
-                Log.info("删除设备成功");
+                Log.info("删除应用成功");
                 apiResult.setData(true);
             }else if(i==401){
                 apiResult.setCode(CommonCode.PARAMETER_LOSE.getKey());

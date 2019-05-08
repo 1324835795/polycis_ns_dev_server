@@ -136,14 +136,14 @@ public class UnionAppController {
     public ApiResult updateApp(@RequestBody UnionApp appInfo) {
         ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
-            Log.info("得到appEui"+appInfo.getAppEui());
+            Log.info("得到appEui"+appInfo.toString());
             boolean b = iUnionAppService.updateApp(appInfo);
             apiResult.setData(b);
             if (b == false) {
                 apiResult.setCode(CommonCode.ERROR.getKey());
                 apiResult.setMsg("更新应用失败");
             }
-
+            Log.info("更新应用成功返回:"+appInfo.getAppEui());
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("应用修改失败");

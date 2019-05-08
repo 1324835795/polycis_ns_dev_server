@@ -1,5 +1,6 @@
 package com.polycis.api.nb.service.device.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.polycis.api.nb.client.app.AppServiceClient;
@@ -146,13 +147,23 @@ public class UnionAppServiceImpl extends ServiceImpl<UnionAppMapper, UnionApp> i
     public boolean updateApp(UnionApp appInfo) {
         if(appInfo.getAppEui()!=null){
             //修改应用
-            Map<String,Object> apply =new HashMap<> ();
+            boolean b = this.update(appInfo, new EntityWrapper<UnionApp>().eq("app_eui", appInfo.getAppEui()));
+            if(appInfo.getHttp()!=null){
+                //同步修改http
+                Http httpInfo = new Http();
+                httpInfo.setHttpName(appInfo.getHttp());
+                httpInfo.setAppEui(appInfo.getAppEui());
+                httpService.update(httpInfo,new EntityWrapper<Http>().eq("app_eui",httpInfo.getAppEui()));
+            }
+
+            return b;
+         /*   Map<String,Object> apply =new HashMap<> ();
             apply.put("app_eui",appInfo.getAppEui());
             List<UnionApp> unionApps = this.selectByMap(apply);
             UnionApp unionApp = unionApps.get(0);
             unionApp.setLoraAppId(appInfo.getLoraAppId());
             boolean b = this.updateById(unionApp);
-            return b;
+            return b;*/
         }
 
         return false;

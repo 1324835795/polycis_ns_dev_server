@@ -65,6 +65,16 @@ public class UnionDevice implements Serializable {
      */
     private String queue;
 
+    private Date reportTime;
+
+    public Date getReportTime() {
+        return reportTime;
+    }
+
+    public void setReportTime(Date reportTime) {
+        this.reportTime = reportTime;
+    }
+
     public String getQueue() {
         return queue;
     }

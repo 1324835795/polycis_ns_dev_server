@@ -1,5 +1,6 @@
 package com.polycis.api.nb.service.device.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.polycis.api.nb.entity.device.Http;
@@ -91,10 +92,11 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
 
 
     @Override
-    public UnionDevice updateDev(UnionDevice unionDevice) {
+    public boolean updateDev(UnionDevice unionDevice) {
+
         //修改设备
-        this.updateById(unionDevice);
-        return null;
+        boolean b = this.update(unionDevice, new EntityWrapper<UnionDevice>().eq("dev_uuid", unionDevice.getDevUuid()));
+        return b;
     }
 
     @Override

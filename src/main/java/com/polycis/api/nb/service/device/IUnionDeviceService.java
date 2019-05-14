@@ -43,7 +43,7 @@ public interface IUnionDeviceService extends IService<UnionDevice> {
      * @param
      * @return
      */
-    UnionDevice updateDev(UnionDevice unionDevice);
+    boolean updateDev(UnionDevice unionDevice);
 
 
     /**

@@ -52,7 +52,6 @@ public class UnionDeviceController {
                 apiResult.setCode(CommonCode.ERROR.getKey());
                 apiResult.setMsg("设备已存在");
             }
-
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("设备创建失败");
@@ -121,7 +120,7 @@ public class UnionDeviceController {
 
 
     /**
-     * 修改设备状态(未完成)
+     * 修改设备状态
      * @param device
      * @return String
      */
@@ -129,13 +128,18 @@ public class UnionDeviceController {
     public ApiResult updateDev(@RequestBody UnionDevice device) {
         ApiResult<Boolean> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
         try {
-
-
+            boolean b = iUnionDeviceService.updateDev(device);
+            apiResult.setData(b);
+            if (b==false){
+                apiResult.setCode(CommonCode.ERROR.getKey());
+                apiResult.setMsg("修改设备失败");
+            }
         }catch (Exception e){
             apiResult.setCode(CommonCode.ERROR.getKey());
             apiResult.setMsg("修改设备失败");
             Log.error(e.toString());
         }
+        Log.info("得到appEui"+device.getDevUuid());
         return apiResult;
     }
 

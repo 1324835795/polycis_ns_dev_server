@@ -3,9 +3,7 @@ spring:
     name: polycis-ns-dev-server
   cloud:
     inetutils:
-      #过滤ip网段，多个网卡可以采用这种方式配置
-      preferredNetworks:
-        - 192.168.10
+      use-only-site-local-interfaces: true
 server:
   port: 10005
   tomcat:
@@ -15,6 +13,9 @@ server:
     acceptCount: 100
 eureka:
   client:
+    #从Eureka服务器端获取注册信息的间隔时间，单位：秒
+    registryFetchIntervalSeconds: 30
+    #注册中心地址
     serviceUrl:
       defaultZone: http://192.168.10.20:10035/eureka/
       #defaultZone: http://59.110.225.90:8761/eureka/

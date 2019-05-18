@@ -17,7 +17,10 @@ eureka:
     registryFetchIntervalSeconds: 30
     #注册中心地址
     serviceUrl:
-      defaultZone: http://192.168.10.20:10007/eureka/
+      defaultZone: http://47.94.128.139:10035/eureka/
+      #defaultZone: http://59.110.225.90:8761/eureka/
+     #defaultZone: http://localhost:10035/eureka/
+
   instance:
     #告诉服务端，如果我20s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
     lease-expiration-duration-in-seconds: 20

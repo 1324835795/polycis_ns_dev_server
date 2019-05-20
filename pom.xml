@@ -160,6 +160,12 @@
 			<version>2.3</version>
 		</dependency>
 
+        <!-- springcloud amdin 监控依赖  -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>1.5.6</version>
+        </dependency>
 
 	</dependencies>
 

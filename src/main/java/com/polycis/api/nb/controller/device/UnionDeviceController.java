@@ -176,7 +176,33 @@ public class UnionDeviceController {
     }
 
 
+    /**
+     * 查询设备uuid Nb专用
+     * @param device
+     * @return String
+     */
+    @PostMapping(value = "/devuuid")
+    public ApiResult selectDevuuid(@RequestBody UnionDevice device) {
+        ApiResult<UnionDevice> apiResult  = new ApiResult<>(CommonCode.SUCCESS);
+        try {
+            Log.info("得到appEui"+device.getNbDevId());
+            UnionDevice unionDevice = iUnionDeviceService.devuuid(device);
+            if(unionDevice!=null){
+                //查询到设备
+                apiResult.setData(unionDevice);
+            }else{
+                //未查到数据
+                apiResult.setCode(CommonCode.NO_DATA.getKey());
+                apiResult.setMsg(CommonCode.NO_DATA.getValue());
 
+            }
+        }catch (Exception e){
+            apiResult.setCode(CommonCode.ERROR.getKey());
+            apiResult.setMsg("查询应用失败");
+            Log.error(e.toString());
+        }
+        return apiResult;
+    }
 
 }
 

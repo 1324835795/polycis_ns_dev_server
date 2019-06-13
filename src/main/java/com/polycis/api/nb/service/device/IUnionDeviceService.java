@@ -53,4 +53,5 @@ public interface IUnionDeviceService extends IService<UnionDevice> {
      */
     DevQueueVO deviQueue(UnionDevice unionDevice);
 
+    UnionDevice devuuid(UnionDevice device);
 }

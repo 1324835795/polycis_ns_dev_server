@@ -166,4 +166,20 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
             return devQueueVO;
         }
     }
+
+    @Override
+    public UnionDevice devuuid(UnionDevice unionDevice) {
+
+        //查询设备
+        Map<String,Object> device =new HashMap<>();
+        device.put("nb_dev_id",unionDevice.getNbDevId());
+        List<UnionDevice> unionApps = this.selectByMap(device);
+        if(!unionApps.isEmpty()){
+            //应用存在
+            UnionDevice deviceInfo = unionApps.get(0);
+            return deviceInfo;
+        }
+        return null;
+
+    }
 }

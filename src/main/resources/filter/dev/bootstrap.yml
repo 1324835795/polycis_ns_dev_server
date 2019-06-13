@@ -1,11 +1,11 @@
 spring:
   application:
-    name: polycis-ns-dev-server
+    name: polycis-ns-dev-server-test
   cloud:
     inetutils:
       use-only-site-local-interfaces: true
 server:
-  port: 10005
+  port: 10095
   tomcat:
     uri-encoding: UTF-8
     max-threads: 200

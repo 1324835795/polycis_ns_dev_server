@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * </p>
  *
- * @author cuiwenhao
+ * @author ${author}
  * @since 2019-04-18
  */
 @TableName("dev_union_device")
@@ -65,14 +65,19 @@ public class UnionDevice implements Serializable {
      */
     private String queue;
 
+    /**
+     * 上报时间
+     */
     private Date reportTime;
 
-    public Date getReportTime() {
-        return reportTime;
+    private String nbDevId;
+
+    public String getNbDevId() {
+        return nbDevId;
     }
 
-    public void setReportTime(Date reportTime) {
-        this.reportTime = reportTime;
+    public void setNbDevId(String nbDevId) {
+        this.nbDevId = nbDevId;
     }
 
     public String getQueue() {
@@ -155,6 +160,14 @@ public class UnionDevice implements Serializable {
         this.priority = priority;
     }
 
+    public Date getReportTime() {
+        return reportTime;
+    }
+
+    public void setReportTime(Date reportTime) {
+        this.reportTime = reportTime;
+    }
+
     @Override
     public String toString() {
         return "UnionDevice{" +
@@ -168,6 +181,8 @@ public class UnionDevice implements Serializable {
                 ", priority='" + priority + '\'' +
                 ", status='" + status + '\'' +
                 ", queue='" + queue + '\'' +
+                ", reportTime=" + reportTime +
+                ", nbDevId='" + nbDevId + '\'' +
                 '}';
     }
 }

@@ -28,7 +28,7 @@ public class GeneratorServiceEntity {
 
         String packageName = "com.polycis.api.nb.puls";
         boolean serviceNameStartWithI = true;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "dev_http");
+        generateByTables(serviceNameStartWithI, packageName, "iot_product");
     }
 
 
@@ -48,7 +48,7 @@ public class GeneratorServiceEntity {
         strategyConfig.setDbColumnUnderline(true); //数据库表字段采用下划线的
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategyConfig.setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
-        strategyConfig.setTablePrefix(new String[]{"dev_", ""});// 此处可以修改为您的表前缀
+        strategyConfig.setTablePrefix(new String[]{"iot_", ""});// 此处可以修改为您的表前缀
        // strategyConfig.entityTableFieldAnnotationEnable(true);//生成实体类属性的对应数据库字段注解
 
         config.setActiveRecord(false);

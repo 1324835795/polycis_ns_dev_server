@@ -70,7 +70,20 @@ public class UnionDevice implements Serializable {
      */
     private Date reportTime;
 
+
     private String nbDevId;
+    /**
+     * 产品eui
+     */
+    private String product_eui;
+
+    public String getProduct_eui() {
+        return product_eui;
+    }
+
+    public void setProduct_eui(String product_eui) {
+        this.product_eui = product_eui;
+    }
 
     public String getNbDevId() {
         return nbDevId;

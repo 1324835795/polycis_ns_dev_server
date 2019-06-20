@@ -75,14 +75,14 @@ public class UnionDevice implements Serializable {
     /**
      * 产品eui
      */
-    private String product_eui;
+    private String productEui;
 
-    public String getProduct_eui() {
-        return product_eui;
+    public String getProductEui() {
+        return productEui;
     }
 
-    public void setProduct_eui(String product_eui) {
-        this.product_eui = product_eui;
+    public void setProductEui(String productEui) {
+        this.productEui = productEui;
     }
 
     public String getNbDevId() {
@@ -196,6 +196,7 @@ public class UnionDevice implements Serializable {
                 ", queue='" + queue + '\'' +
                 ", reportTime=" + reportTime +
                 ", nbDevId='" + nbDevId + '\'' +
+                ", productEui='" + productEui + '\'' +
                 '}';
     }
 }

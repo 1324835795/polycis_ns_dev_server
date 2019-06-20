@@ -3,16 +3,10 @@ package com.polycis.api.nb.service.device.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.polycis.api.nb.entity.device.Http;
-import com.polycis.api.nb.entity.device.MqQueue;
-import com.polycis.api.nb.entity.device.UnionApp;
-import com.polycis.api.nb.entity.device.UnionDevice;
+import com.polycis.api.nb.entity.device.*;
 import com.polycis.api.nb.entity.device.vo.DevQueueVO;
 import com.polycis.api.nb.mapper.device.UnionDeviceMapper;
-import com.polycis.api.nb.service.device.IHttpService;
-import com.polycis.api.nb.service.device.IMqQueueService;
-import com.polycis.api.nb.service.device.IUnionAppService;
-import com.polycis.api.nb.service.device.IUnionDeviceService;
+import com.polycis.api.nb.service.device.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +33,8 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
     IHttpService iHttpService;
     @Autowired
     IMqQueueService iMqQueueService;
+    @Autowired
+    IProductService iProductService;
 
 
     @Override
@@ -181,5 +177,17 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
         }
         return null;
 
+    }
+
+    @Override
+    public Integer devanaly(UnionDevice unionDevice) {
+
+        //根据设备的产品标识查询数据处理类型
+        Map<String,Object> pro = new HashMap<>();
+        pro.put("product_eui",unionDevice.getProductEui());
+        List<Product> products = iProductService.selectByMap(pro);
+        Integer way = products.get(0).getAnalysisWay();
+
+        return way;
     }
 }

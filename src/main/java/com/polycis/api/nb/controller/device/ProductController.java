@@ -95,18 +95,18 @@ public class ProductController {
             Log.info("得到ProductEui"+product.getProductEui());
             Integer i = iProductService.deleteProduct(product);
             if(i==200){
-                Log.info("删除应用成功");
+                Log.info("删除产品成功");
                 apiResult.setData(true);
             }else if(i==401){
                 apiResult.setCode(CommonCode.PARAMETER_LOSE.getKey());
-                apiResult.setMsg("应用存在设备,不允许删除");
+                apiResult.setMsg("产品存在设备,不允许删除");
             }else{
                 apiResult.setCode(CommonCode.ERROR.getKey());
-                apiResult.setMsg("删除应用失败");
+                apiResult.setMsg("删除产品失败");
             }
         } catch (Exception e) {
             apiResult.setCode(CommonCode.ERROR.getKey());
-            apiResult.setMsg("删除应用失败");
+            apiResult.setMsg("删除产品失败");
             Log.error(e.toString());
         }
         return apiResult;

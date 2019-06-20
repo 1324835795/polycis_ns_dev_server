@@ -16,12 +16,20 @@ public class DevQueueVO {
      */
     private String queueNameApp;
 
-
+    private Integer analysisWay;
     /**
      * 优先级[1,2,3,4,5,6....255]
      * 默认10
      * */
     private Integer priority;
+
+    public Integer getAnalysisWay() {
+        return analysisWay;
+    }
+
+    public void setAnalysisWay(Integer analysisWay) {
+        this.analysisWay = analysisWay;
+    }
 
     public Integer getPriority() {
         return priority;
@@ -61,6 +69,8 @@ public class DevQueueVO {
                 "devUuid='" + devUuid + '\'' +
                 ", httpApp='" + httpApp + '\'' +
                 ", queueNameApp='" + queueNameApp + '\'' +
+                ", analysisWay=" + analysisWay +
+                ", priority=" + priority +
                 '}';
     }
 }

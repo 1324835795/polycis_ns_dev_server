@@ -159,8 +159,10 @@ public class UnionDeviceController {
             UnionDevice unionDevice = iUnionDeviceService.devisExist(device);
 
             if(unionDevice!=null){
-                //查询到设备
+                //查询到设备并查询推送信息
                 DevQueueVO devQueueVO = iUnionDeviceService.deviQueue(unionDevice);
+                Integer devanaly = iUnionDeviceService.devanaly(unionDevice);
+                devQueueVO.setAnalysisWay(devanaly);
                 apiResult.setData(devQueueVO);
             }else{
                 //未查到数据

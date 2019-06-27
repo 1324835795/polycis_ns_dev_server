@@ -1,6 +1,9 @@
+polycis-ns-dev-server: polycis-ns-dev-server-test
+polycis-ns-lora-service: polycis-ns-lora-service-test
+
 spring:
   application:
-    name: polycis-ns-dev-server-test
+    name: ${polycis-ns-dev-server}
   cloud:
     inetutils:
       use-only-site-local-interfaces: true

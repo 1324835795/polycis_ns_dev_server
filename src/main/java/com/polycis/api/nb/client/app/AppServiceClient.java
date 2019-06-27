@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@FeignClient(value = "polycis-ns-lora-service", fallback = AppServiceClientHystrix.class)
+@FeignClient(value = "${polycis-ns-lora-service}", fallback = AppServiceClientHystrix.class)
 public interface AppServiceClient {
 
     @RequestMapping(value="/lora/application",method = {RequestMethod.POST},produces = {"application/json;charset=UTF-8"})

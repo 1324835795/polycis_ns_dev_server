@@ -1,5 +1,5 @@
-polycis-ns-dev-server: polycis-ns-dev-server-test
-polycis-ns-lora-service: polycis-ns-lora-service-test
+polycis-ns-dev-server: polycis-ns-dev-server
+polycis-ns-lora-service: polycis-ns-lora-service
 
 spring:
   application:

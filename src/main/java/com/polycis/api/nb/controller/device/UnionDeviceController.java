@@ -163,6 +163,7 @@ public class UnionDeviceController {
                 //查询到设备并查询推送信息
                 DevQueueVO devQueueVO = iUnionDeviceService.deviQueue(unionDevice);
                 Product devanaly = iUnionDeviceService.devanaly(unionDevice);
+                devQueueVO.setProductId(unionDevice.getProductEui());
                 devQueueVO.setAnalysisWay(devanaly.getAnalysisWay());
                 devQueueVO.setProtocolId(devanaly.getProtocolId());
                 apiResult.setData(devQueueVO);

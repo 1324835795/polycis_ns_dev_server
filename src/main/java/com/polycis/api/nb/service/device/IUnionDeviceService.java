@@ -1,6 +1,7 @@
 package com.polycis.api.nb.service.device;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.polycis.api.nb.entity.device.Product;
 import com.polycis.api.nb.entity.device.UnionApp;
 import com.polycis.api.nb.entity.device.UnionDevice;
 import com.polycis.api.nb.entity.device.vo.DevQueueVO;
@@ -55,5 +56,8 @@ public interface IUnionDeviceService extends IService<UnionDevice> {
 
     UnionDevice devuuid(UnionDevice device);
 
-    Integer devanaly(UnionDevice unionDevice);
+    Product devanaly(UnionDevice unionDevice);
+
+
+
 }

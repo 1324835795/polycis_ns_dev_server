@@ -23,6 +23,16 @@ public class DevQueueVO {
      * */
     private Integer priority;
 
+    private Integer protocolId;
+
+    public Integer getProtocolId() {
+        return protocolId;
+    }
+
+    public void setProtocolId(Integer protocolId) {
+        this.protocolId = protocolId;
+    }
+
     public Integer getAnalysisWay() {
         return analysisWay;
     }

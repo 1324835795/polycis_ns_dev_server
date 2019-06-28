@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.polycis.api.nb.common.ApiResult;
 import com.polycis.api.nb.common.CommonCode;
 import com.polycis.api.nb.common.vo.RequestVO;
+import com.polycis.api.nb.entity.device.Product;
 import com.polycis.api.nb.entity.device.UnionApp;
 import com.polycis.api.nb.entity.device.UnionDevice;
 import com.polycis.api.nb.entity.device.vo.DevQueueVO;
@@ -161,8 +162,9 @@ public class UnionDeviceController {
             if(unionDevice!=null){
                 //查询到设备并查询推送信息
                 DevQueueVO devQueueVO = iUnionDeviceService.deviQueue(unionDevice);
-                Integer devanaly = iUnionDeviceService.devanaly(unionDevice);
-                devQueueVO.setAnalysisWay(devanaly);
+                Product devanaly = iUnionDeviceService.devanaly(unionDevice);
+                devQueueVO.setAnalysisWay(devanaly.getAnalysisWay());
+                devQueueVO.setProtocolId(devanaly.getProtocolId());
                 apiResult.setData(devQueueVO);
             }else{
                 //未查到数据

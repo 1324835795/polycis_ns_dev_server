@@ -180,14 +180,16 @@ public class UnionDeviceServiceImpl extends ServiceImpl<UnionDeviceMapper, Union
     }
 
     @Override
-    public Integer devanaly(UnionDevice unionDevice) {
+    public Product devanaly(UnionDevice unionDevice) {
 
         //根据设备的产品标识查询数据处理类型
         Map<String,Object> pro = new HashMap<>();
         pro.put("product_eui",unionDevice.getProductEui());
         List<Product> products = iProductService.selectByMap(pro);
-        Integer way = products.get(0).getAnalysisWay();
+        Product product = products.get(0);
 
-        return way;
+        return product;
     }
+
+
 }

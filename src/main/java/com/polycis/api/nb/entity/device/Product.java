@@ -66,6 +66,15 @@ public class Product implements Serializable {
      */
     private Date createTime;
 
+    private Integer protocolId;
+
+    public Integer getProtocolId() {
+        return protocolId;
+    }
+
+    public void setProtocolId(Integer protocolId) {
+        this.protocolId = protocolId;
+    }
 
     public Integer getId() {
         return id;

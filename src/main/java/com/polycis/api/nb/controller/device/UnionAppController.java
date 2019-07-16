@@ -46,7 +46,7 @@ public class UnionAppController {
      */
 
     /**
-     * 对外新增应用
+     * 对外新增应用test
      * @param appInfo
      * @return
      */

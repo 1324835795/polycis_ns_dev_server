@@ -61,6 +61,16 @@ public class UnionApp implements Serializable {
     private String MqQueue;
 
 
+    private String appKey;
+
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
+    }
+
     public String getMqQueue() {
         return MqQueue;
     }

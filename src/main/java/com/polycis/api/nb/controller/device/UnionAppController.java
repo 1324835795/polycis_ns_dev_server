@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * <p>
  *  前端控制器
@@ -44,7 +46,6 @@ public class UnionAppController {
      邻居亲朋不要比，儿孙琐事由他去。
      吃苦享乐在一起，神仙羡慕好伴侣。
      */
-
     /**
      * 对外新增应用test
      * @param appInfo
@@ -52,11 +53,13 @@ public class UnionAppController {
      */
     @PostMapping(value = "/addApp")
     public ApiResult addApp(@RequestBody UnionApp appInfo) {
-        ApiResult<Boolean> apiResult = new ApiResult<>(CommonCode.SUCCESS);
+        ApiResult<String> apiResult = new ApiResult<>(CommonCode.SUCCESS);
         try {
+            String string = UUID.randomUUID().toString().replaceAll("-", "");
+            appInfo.setAppKey(string);
             boolean b = iUnionAppService.addApp(appInfo);
             Log.info("得到appEui"+appInfo.getAppEui());
-            apiResult.setData(b);
+            apiResult.setData(string);
             if (b == false) {
                 Log.info("应用存在创建失败");
                 apiResult.setCode(CommonCode.ERROR.getKey());

@@ -1,4 +1,4 @@
-package com.polycis.api.nb;
+package com.polycis.api.nb.util;
 
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;

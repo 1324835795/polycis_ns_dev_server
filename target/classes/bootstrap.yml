@@ -1,0 +1,33 @@
+polycis-ns-dev-server: polycis-ns-dev-server
+polycis-ns-lora-service: polycis-ns-lora-service
+
+spring:
+  application:
+    name: ${polycis-ns-dev-server}
+  cloud:
+    inetutils:
+      use-only-site-local-interfaces: true
+server:
+  port: 10095
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 200
+    connection-timeout: 5000
+    acceptCount: 100
+eureka:
+  client:
+    #从Eureka服务器端获取注册信息的间隔时间，单位：秒
+    registryFetchIntervalSeconds: 30
+    #注册中心地址
+    serviceUrl:
+      defaultZone: http://192.168.10.20:10035/eureka/
+      #defaultZone: http://59.110.225.90:8761/eureka/
+     #defaultZone: http://localhost:10035/eureka/
+
+  instance:
+    #告诉服务端，如果我20s之内没有给你发心跳，就代表我“死”了，将我踢出掉。
+    lease-expiration-duration-in-seconds: 20
+    #每间隔10s，向服务端发送一次心跳，证明自己依然”存活“
+    leaseRenewalIntervalInSeconds: 10
+    #用IP注册服务，默认是机器名称
+    prefer-ip-address: true
